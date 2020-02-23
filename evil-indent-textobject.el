@@ -84,10 +84,10 @@ the current line and the line above."
   :type line
   (let ((range (evil-indent--same-indent-range)))
     (evil-range (save-excursion
-                  (goto-char (first (evil-indent--same-indent-range)))
+                  (goto-char (cl-first (evil-indent--same-indent-range)))
                   (forward-line -1)
                   (point-at-bol))
-                (second range) 'line)))
+                (cl-second range) 'line)))
 
 (evil-define-text-object evil-indent-a-indent-lines (&optional count beg end type)
   "Text object describing the block with the same indentation as
@@ -95,11 +95,11 @@ the current line and the lines above and below."
   :type line
   (let ((range (evil-indent--same-indent-range)))
     (evil-range (save-excursion
-                  (goto-char (first range))
+                  (goto-char (cl-first range))
                   (forward-line -1)
                   (point-at-bol))
                 (save-excursion
-                  (goto-char (second range))
+                  (goto-char (cl-second range))
                   (forward-line 1)
                   (point-at-eol)) 'line)))
 
@@ -108,7 +108,7 @@ the current line and the lines above and below."
 the current line."
   :type line
   (let ((range (evil-indent--same-indent-range)))
-    (evil-range (first range) (second range) 'line)))
+    (evil-range (cl-first range) (cl-second range) 'line)))
 
 ;;;###autoload
 (eval-after-load 'evil
